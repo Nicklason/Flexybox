@@ -1,17 +1,34 @@
-﻿@using System.Diagnostics;
-
-@page "/"
+﻿@page "/"
 
 @code {
-  private RestaurantModel? restaurant;
-
-  protected override void OnInitialized()
-  {
-    restaurant = RestaurantService.GetByName("Aalborg");
-    Debug.Assert(restaurant != null, "Restaurant should not be null");
-  }
+  private List<RestaurantModel> restaurants = RestaurantService.GetAll();
 }
 
-<PageTitle>Home</PageTitle>
+<div class="page">
+  <div class="section">
+    <div class="subsection">
+      <div class="title">
+        <h1>Welcome to Flexybook</h1>
+      </div>
+    </div>
+    <div class="subsection">
+      <p>Explore our collection of restaurants.</p>
+    </div>
+  </div>
+  <div class="subsection">
+    <h2>Featured Restaurants</h2>
 
-<Restaurant Name="@restaurant.Name" Images="@restaurant.Images" Address="@restaurant.Address" Contact="@restaurant.Contact" OpenHours="@restaurant.OpenHours" />
+    @if (restaurants.Count == 0)
+    {
+      <p>No restaurants available.</p>
+      return;
+    }
+
+    @foreach (var restaurant in restaurants)
+    {
+      <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
+        @restaurant.Name
+      </NavLink>
+    }
+  </div>
+</div>
