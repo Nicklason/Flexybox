@@ -1,0 +1,32 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  background: black;
+}
+
+.section {
+  flex: 1;
+  background: grey;
+  margin: 10px;
+}
+
+.subsection {
+  background: lightgrey;
+  margin: 10px;
+}
+
+.scroll-container {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
