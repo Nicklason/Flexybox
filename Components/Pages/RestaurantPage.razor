@@ -1,0 +1,21 @@
+@page "/restaurant/{Name}"
+
+@code {
+  [Parameter] public required string Name { get; set; }
+
+  private RestaurantModel? model;
+
+  protected override void OnInitialized()
+  {
+    model = RestaurantService.GetByName(Name);
+  }
+}
+
+@if (model == null)
+{
+  <p>Restaurant not found.</p>
+}
+else
+{
+  <Restaurant Name="@model.Name" Images="@model.Images" Address="@model.Address" Contact="@model.Contact" OpenHours="@model.OpenHours" />
+}
