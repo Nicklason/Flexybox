@@ -1,12 +1,23 @@
-<div class="subsection">
+@code {
+  [Parameter]
+  public required bool IsOpen { get; set; }
+  [Parameter]
+  public required AddressModel Address { get; set; }
+  [Parameter]
+  public required ContactModel Contact { get; set; }
+}
+
+<div class="subsection scroll-container">
   <div class="row">
-    <span>Open</span>
-    <span>Østerågade 27, 9000</span>
-    <span>Aalborg</span>
+    <span>@(IsOpen ? "Open" : "Closed")</span>
+    <span>@Address.GetStreetAndZipCode()</span>
+    <span>@Address.City</span>
   </div>
   <div class="row">
-    <span>+45 11 22 33 44</span>
-    <span>aalborg@flexybox.com</span>
-    <button>Support</button>
+    <span>@Contact.GetPhoneNumber()</span>
+    <span>@Contact.Email</span>
+    @if (@Contact.HasSupportChat) {
+      <span>Support Chat</span>
+    }
   </div>
 </div>

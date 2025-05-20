@@ -1,27 +1,42 @@
+@code {
+  [Parameter]
+  public required string Name { get; set; }
+  [Parameter]
+  public required List<string> Images { get; set; }
+  [Parameter]
+  public required AddressModel Address { get; set; }
+  [Parameter]
+  public required ContactModel Contact { get; set; }
+  [Parameter]
+  public required List<OpeningHoursModel> OpenHours { get; set; }
+
+  protected override void OnInitialized()
+  {
+    if (OpenHours.Count == 0) {
+      throw new InvalidOperationException("OpenHours may not be empty");
+    }
+  }
+}
+
 <div class="page">
   <div class="section">
     <div class="subsection">
       <div class="title">
-        <h1>Aalborg</h1>
+        <h1>@Name</h1>
         <button>Save</button>
       </div>
     </div>
 
-    <AddressAndContact />
+    <AddressAndContact Address="@Address" Contact="@Contact" IsOpen=@(OpenHours[0].IsOpenNow())/>
 
     <div class="subsection scroll-container">
-      <img src="@Assets["/red.png"]" />
-      <img src="@Assets["/green.png"]" />
-      <img src="@Assets["/blue.png"]" />
-      <img src="@Assets["/red.png"]" />
-      <img src="@Assets["/green.png"]" />
-      <img src="@Assets["/blue.png"]" />
-      <img src="@Assets["/red.png"]" />
-      <img src="@Assets["/green.png"]" />
-      <img src="@Assets["/blue.png"]" />
+      @foreach (var image in Images)
+      {
+        <img src="@image" />
+      }
     </div>
   </div>
 
-  <OpeningHours />
+  <OpeningHours OpenHours="@OpenHours" />
   
 </div>
