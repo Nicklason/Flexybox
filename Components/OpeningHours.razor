@@ -4,6 +4,13 @@
 
   private int selectedIndex { get; set; } = 0;
 
+  protected override void OnInitialized()
+  {
+    if (OpenHours == null || OpenHours.Count == 0) {
+      throw new InvalidOperationException("OpenHours may not be empty");
+    }
+  }
+
   private void OnRadioChanged(ChangeEventArgs e)
   {
     var name = e.Value?.ToString();

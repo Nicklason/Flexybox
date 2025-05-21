@@ -9,13 +9,6 @@
   public required ContactModel Contact { get; set; }
   [Parameter]
   public required List<OpeningHoursModel> OpenHours { get; set; }
-
-  protected override void OnInitialized()
-  {
-    if (OpenHours.Count == 0) {
-      throw new InvalidOperationException("OpenHours may not be empty");
-    }
-  }
 }
 
 <div class="page">
