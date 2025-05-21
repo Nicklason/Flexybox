@@ -1,6 +1,18 @@
 @code {
   [Parameter]
   public required List<OpeningHoursModel> OpenHours { get; set; }
+
+  private int selectedIndex { get; set; } = 0;
+
+  private void OnRadioChanged(ChangeEventArgs e)
+  {
+    var name = e.Value?.ToString();
+    var index = OpenHours.FindIndex(x => x.Name == name);
+    if (index != -1)
+    {
+      selectedIndex = index;
+    }
+  }
 }
 
 <div class="section">
@@ -11,13 +23,13 @@
   <div class="subsection scroll-container">
     @for (int i = 0; i < OpenHours.Count; i++)
     {
-      <input name="hours" id="a" type="radio" checked="@(i == 0)">
+      <input name="hours" value="@OpenHours[i].Name" type="radio" checked="@(i == 0)" @onchange="OnRadioChanged" disabled="@(!RendererInfo.IsInteractive)">
       <label for="a">@OpenHours[i].Name</label>
     }
   </div>
   <div class="subsection opening-hours">
     <dl>
-      @foreach (var (day, description) in OpenHours[0].GetOpeningHoursSummary())
+      @foreach (var (day, description) in OpenHours[selectedIndex].GetOpeningHoursSummary())
       {
         <dt>@day</dt>
         <dd>@description</dd>
