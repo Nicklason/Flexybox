@@ -79,16 +79,17 @@ public class OpeningHoursModel
             Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Holiday
         })
         {
-            string description;
+            var intervals = day.Intervals
+                .Select(i => $"{FormatTimeSpan(i.Start)} - {FormatTimeSpan(i.End)}")
+                .ToList();
 
-            if (day.IsClosed)
+            string description = intervals.Count switch
             {
-                description = "Closed";
-            }
-            else
-            {
-                description = string.Join(", ", day.Intervals.Select(i => $"{FormatTimeSpan(i.Start)} - {FormatTimeSpan(i.End)}"));
-            }
+                0 => "Closed",
+                1 => intervals[0],
+                2 => string.Join(" and ", intervals),
+                _ => string.Join(", ", intervals.Take(intervals.Count - 1)) + " and " + intervals.Last()
+            };
 
             summary.Add((day.DayName, description));
         }
