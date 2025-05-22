@@ -7,8 +7,6 @@
   private List<(int, string)> departments = new ();
   private List<(int, string)> favoriteDepartments = new ();
 
-  private bool IsLoaded = false;
-
   protected override async Task OnInitializedAsync() {
     departments = await DepartmentsService.GetAllIdsAndNamesAsync();
   }
@@ -19,7 +17,6 @@
     }
 
     await LoadStateAsync();
-    IsLoaded = true;
     StateHasChanged();
   }
 
