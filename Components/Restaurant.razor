@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@inject ProtectedLocalStorage ProtectedStore
+@inject LikedRestaurantsService LikedRestaurantsService
 
 @code {
   [Parameter]
@@ -29,33 +29,21 @@
   }
 
   private async Task LoadStateAsync() {
-    var liked = await GetLikedAsync();
+    var liked = await LikedRestaurantsService.GetLikedAsync();
     IsLiked = liked.Contains(Name);
-  }
-
-  private async Task<HashSet<string>> GetLikedAsync() {
-    var result = await ProtectedStore.GetAsync<HashSet<string>>(LIKED_STORE_KEY);
-    if (result.Success && result.Value != null) {
-      return result.Value;
-    }
-    return new HashSet<string>();
-  }
-
-  private async Task SaveLikedAsync(HashSet<string> liked) {
-    await ProtectedStore.SetAsync(LIKED_STORE_KEY, liked);
   }
 
   private async Task ToggleLikedAsync() {
     IsLiked = !IsLiked;
 
-    var liked = await GetLikedAsync();
+    var liked = await LikedRestaurantsService.GetLikedAsync();
     if (IsLiked) {
       liked.Add(Name);
     } else {
       liked.Remove(Name);
     }
 
-    await SaveLikedAsync(liked);
+    await LikedRestaurantsService.SaveLikedAsync(liked);
   }
 }
 
