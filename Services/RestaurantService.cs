@@ -83,17 +83,17 @@ public static class RestaurantService
           Friday = new OpeningHoursDayModel
           {
             DayName = "Friday",
-            Intervals = TwelveToMidnight
+            Intervals = name == "Restaurant" ? SevenToTwentyTwo : TwelveToMidnight
           },
           Saturday = new OpeningHoursDayModel
           {
             DayName = "Saturday",
-            Intervals = TwelveToMidnight
+            Intervals = name == "Restaurant" ? SevenToTwentyTwo : TwelveToMidnight
           },
           Sunday = new OpeningHoursDayModel
           {
             DayName = "Sunday",
-            Intervals = MultipleIntervals
+            Intervals = name == "Restaurant" ? SevenToTwentyTwo : MultipleIntervals
           },
           Holiday = new OpeningHoursDayModel
           {
