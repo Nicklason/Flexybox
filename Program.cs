@@ -1,5 +1,7 @@
 using Flexybox.Components;
+using Flexybox.Data;
 using Blazored.Toast;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddScoped<FavoriteDepartmentsService>()
     .AddBlazoredToast();
+
+builder.Services.AddDbContext<AppDbContext>((options) => {
+    options.UseMySql(DbConfig.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 34)));
+});
 
 var app = builder.Build();
 
