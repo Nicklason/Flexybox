@@ -70,7 +70,7 @@ public class OpeningHoursModel
     public bool IsOpenNow() => IsOpen(DateTime.Now);
 
     // TODO: Collapse days in a row with same opening hours into a single entry
-    public List<(string, string)> GetOpeningHoursSummary()
+    public List<(string, string)> GetOpeningHoursSummary(int maxCollapse = int.MaxValue)
     {
         var summary = new List<(string, string)>();
 
@@ -92,6 +92,42 @@ public class OpeningHoursModel
 
             summary.Add((day.DayName, description));
         }
+
+        if (maxCollapse > 0)
+        {
+            var collapsedSummary = new List<(string, string)>();
+            string? lastDescription = null, firstDay = null, lastDay = null;
+
+            foreach (var (day, description) in summary)
+            {
+                if (firstDay == null)
+                {
+                    firstDay = day;
+                    lastDescription = description;
+                }
+
+                if (description == lastDescription && maxCollapse > 0)
+                {
+                    lastDay = day;
+                }
+                else
+                {
+                    collapsedSummary.Add((firstDay + (lastDay != null ? " - " + lastDay : ""), lastDescription!));
+                    firstDay = day;
+                    lastDay = null;
+                    lastDescription = description;
+                    maxCollapse--;
+                }
+            }
+
+            if (firstDay != null)
+            {
+                collapsedSummary.Add((firstDay + (lastDay != null ? " - " + lastDay : ""), lastDescription!));
+            }
+
+            summary = collapsedSummary;
+        }
+
 
         return summary;
     }
