@@ -65,16 +65,12 @@ public static class DbSeeder
             Images = new List<Image> {
                 new Image
                 {
-                    Url = "/red.png"
+                    Url = "/nick-hillier-xBXF9pr6LQo-unsplash.jpg"
                 },
                 new Image
                 {
-                    Url = "/green.png"
-                },
-                new Image
-                {
-                    Url = "/blue.png"
-                },
+                    Url = "/lee-campbell-31QfYo1h32o-unsplash.jpg"
+                }
             },
             Address = new Address
             {

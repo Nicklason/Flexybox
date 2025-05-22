@@ -6,3 +6,28 @@ dl {
 dd {
   text-align: right;
 }
+
+.grid {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  border-radius: 20px;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: bold;
+}
+
+input[type="radio"]:checked + label {
+  background-color: black;
+  color: white;
+}

@@ -1,0 +1,37 @@
+.address {
+    padding-bottom: 6px;
+}
+
+.open {
+    color: rgba(124, 219, 107, 1);
+}
+
+.address .fa-solid {
+    color: inherit;
+}
+
+button {
+    border-radius: 6px;
+    height: 32px;
+    min-width: 32px;
+}
+
+.buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.favorite-toggle {
+    background: rgba(204, 204, 204, 0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 24px;
+}
+
+.is-favorite {
+    color: red;
+}
+
+button span i {
+    padding-right: 6px;
+}

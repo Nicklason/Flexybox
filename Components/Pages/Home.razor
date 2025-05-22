@@ -26,42 +26,34 @@
   }
 }
 
-<div class="page">
-  <div class="section">
-    <div class="subsection">
-      <div class="title">
-        <h1>Welcome to Flexybook</h1>
-      </div>
+<div class="container">
+  <div class="header">
+    <div class="title">
+      <h1>Welcome to Flexybook</h1>
     </div>
-    <div class="subsection">
-      <p>Explore departments.</p>
-    </div>
-    @if (favoriteDepartments.Count != 0) {
-    <div class="subsection">
-      <h2>Your favorite departments</h2>
-
-      @foreach (var department in favoriteDepartments)
-      {
-        <NavLink href="@("/department/" + department.Item1)" Match="NavLinkMatch.All">
-          @department.Item2
-        </NavLink>
-      }
-    </div>
-    }
-    <div class="subsection">
-      <h2>Featured departments</h2>
-
-      @if (departments.Count == 0)
-      {
-        <p>No departments available.</p>
-      } else {
-        @foreach (var department in departments)
-        {
-          <NavLink href="@("/department/" + department.Item1)" Match="NavLinkMatch.All">
-            @department.Item2
-          </NavLink>
-        }
-      }
-    </div>
+    <p>Explore departments.</p>
   </div>
+  @if (favoriteDepartments.Count != 0) {
+    <h3>Your favorite departments</h3>
+
+    @foreach (var department in favoriteDepartments)
+    {
+      <NavLink href="@("/department/" + department.Item1)" Match="NavLinkMatch.All">
+        @department.Item2
+      </NavLink>
+    }
+  }
+  <h3>Featured departments</h3>
+
+  @if (departments.Count == 0)
+  {
+    <p>No departments available.</p>
+  } else {
+    @foreach (var department in departments)
+    {
+      <NavLink href="@("/department/" + department.Item1)" Match="NavLinkMatch.All">
+        @department.Item2
+      </NavLink>
+    }
+  }
 </div>

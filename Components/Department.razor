@@ -15,8 +15,6 @@
   [Parameter]
   public required List<Data.OpeningHours> OpenHours { get; set; }
 
-  private const string LIKED_STORE_KEY = "liked";
-
   private bool IsLiked = false;
   private bool IsLoaded = false;
 
@@ -51,27 +49,5 @@
   }
 }
 
-<div class="page">
-  <div class="section">
-    <div class="subsection">
-      <div class="title">
-        <h1>@Name</h1>
-        @if (IsLoaded && RendererInfo.IsInteractive) {
-          <button style="@(IsLiked ? "color: red;" : "")" @onclick="@ToggleLikedAsync"><i class="fa-solid fa-heart"></i></button>
-        }
-      </div>
-    </div>
-
-    <AddressAndContact Address="@Address" Contact="@Contact" IsOpen=@(OpenHours[0].IsOpenNow())/>
-
-    <div class="subsection scroll-container">
-      @foreach (var image in Images)
-      {
-        <img src="@image.Url" />
-      }
-    </div>
-  </div>
-
-  <OpeningHours OpenHours="@OpenHours.ToList()" />
-  
-</div>
+<DepartmentInformation Id="@Id" Name="@Name" Images="@Images.ToList()" Address="@Address" Contact="@Contact" IsOpen=@(OpenHours[0].IsOpenNow())/>
+<OpeningHours class="container" OpenHours="@OpenHours.ToList()"></OpeningHours>

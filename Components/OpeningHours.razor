@@ -1,4 +1,7 @@
 @code {
+  [Parameter(CaptureUnmatchedValues = true)]
+  public Dictionary<string, object> CapturedAttributes { get; set; } = null!;
+
   [Parameter]
   public required List<Data.OpeningHours> OpenHours { get; set; }
 
@@ -22,19 +25,18 @@
   }
 }
 
-<div class="section">
-  <div class="subsection">
-    <h2>Opening hours</h2>
-  </div>
+<div @attributes="@CapturedAttributes">
+  <h3>Opening hours</h3>
 
-  <div class="subsection scroll-container">
+  <HorizontalScroll style="gap: 8px; padding-bottom: 8px;">
     @for (int i = 0; i < OpenHours.Count; i++)
     {
-      <input name="hours" value="@OpenHours[i].Name" type="radio" checked="@(i == 0)" @onchange="OnRadioChanged" disabled="@(!RendererInfo.IsInteractive)">
-      <label for="a">@OpenHours[i].Name</label>
+      <input name="hours" id="@OpenHours[i].Id" value="@OpenHours[i].Name" type="radio" checked="@(i == 0)" @onchange="OnRadioChanged" disabled="@(!RendererInfo.IsInteractive)">
+      <label for="@OpenHours[i].Id">@OpenHours[i].Name</label>
     }
-  </div>
-  <div class="subsection opening-hours">
+  </HorizontalScroll>
+
+  <div class="grid">
     <dl>
       @foreach (var (day, description) in OpenHours[selectedIndex].GetOpeningHoursSummary())
       {

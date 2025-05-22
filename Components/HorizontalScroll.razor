@@ -1,0 +1,10 @@
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> CapturedAttributes { get; set; }
+}
+
+<div @attributes="@CapturedAttributes">
+    @ChildContent
+</div>
