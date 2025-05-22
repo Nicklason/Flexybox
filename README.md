@@ -13,4 +13,4 @@ This repository contains my solution to the developer task for the Flexybox.com 
     - `.env.app` (used by the app)
     - `.env.mysql` (used by docker compose to configure MySQL database)
 2. Start a MySQL database using `docker-compose up -d` (or create your own).
-3. Start the app using `dotnet run`.
+3. Set environment variables from `.env.app` and then start the app using `dotnet run`.
