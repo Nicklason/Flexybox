@@ -11,17 +11,17 @@ public class FavoriteDepartmentsService
     this.storage = storage;
   }
 
-  public async Task<HashSet<string>> GetLikedAsync()
+  public async Task<HashSet<int>> GetLikedAsync()
   {
-    var result = await storage.GetAsync<HashSet<string>>(STORE_KEY);
+    var result = await storage.GetAsync<HashSet<int>>(STORE_KEY);
     if (result.Success && result.Value != null)
     {
       return result.Value;
     }
-    return new HashSet<string>();
+    return new HashSet<int>();
   }
 
-  public async Task SaveLikedAsync(HashSet<string> liked)
+  public async Task SaveLikedAsync(HashSet<int> liked)
   {
     await storage.SetAsync(STORE_KEY, liked);
   }

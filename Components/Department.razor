@@ -3,6 +3,8 @@
 
 @code {
   [Parameter]
+  public required int Id { get; set; }
+  [Parameter]
   public required string Name { get; set; }
   [Parameter]
   public required List<Data.Image> Images { get; set; }
@@ -30,7 +32,7 @@
 
   private async Task LoadStateAsync() {
     var liked = await FavoriteDepartmentsService.GetLikedAsync();
-    IsLiked = liked.Contains(Name);
+    IsLiked = liked.Contains(Id);
   }
 
   private async Task ToggleLikedAsync() {
@@ -38,9 +40,9 @@
 
     var liked = await FavoriteDepartmentsService.GetLikedAsync();
     if (IsLiked) {
-      liked.Add(Name);
+      liked.Add(Id);
     } else {
-      liked.Remove(Name);
+      liked.Remove(Id);
     }
 
     await FavoriteDepartmentsService.SaveLikedAsync(liked);
