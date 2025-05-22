@@ -1,4 +1,5 @@
 using Flexybox.Components;
+using Blazored.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<FavoriteDepartmentsService>();
+builder.Services.AddScoped<FavoriteDepartmentsService>()
+    .AddBlazoredToast();
 
 var app = builder.Build();
 

@@ -7,4 +7,9 @@
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.Toast" Version="4.2.1" />
+  </ItemGroup>
+
 </Project>
