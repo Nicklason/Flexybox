@@ -34,33 +34,33 @@
     <div class="subsection">
       <p>Explore our collection of restaurants.</p>
     </div>
-  </div>
-  @if (likedRestaurants.Count != 0) {
-  <div class="subsection">
-    <h2>Liked Restaurants</h2>
+    @if (likedRestaurants.Count != 0) {
+    <div class="subsection">
+      <h2>Liked Restaurants</h2>
 
-    @foreach (var restaurant in likedRestaurants)
-    {
-      <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
-        @restaurant.Name
-      </NavLink>
+      @foreach (var restaurant in likedRestaurants)
+      {
+        <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
+          @restaurant.Name
+        </NavLink>
+      }
+    </div>
     }
-  </div>
-  }
-  <div class="subsection">
-    <h2>Featured Restaurants</h2>
+    <div class="subsection">
+      <h2>Featured Restaurants</h2>
 
-    @if (restaurants.Count == 0)
-    {
-      <p>No restaurants available.</p>
-      return;
-    }
+      @if (restaurants.Count == 0)
+      {
+        <p>No restaurants available.</p>
+        return;
+      }
 
-    @foreach (var restaurant in restaurants)
-    {
-      <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
-        @restaurant.Name
-      </NavLink>
-    }
+      @foreach (var restaurant in restaurants)
+      {
+        <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
+          @restaurant.Name
+        </NavLink>
+      }
+    </div>
   </div>
 </div>
