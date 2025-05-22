@@ -19,6 +19,7 @@ public class DepartmentsService
         .Include(d => d.OpenHours)
             .ThenInclude(oh => oh.Days)
                 .ThenInclude(day => day.Intervals)
+        .AsSplitQuery()
         .FirstOrDefaultAsync(d => d.Id == id);
   }
 
