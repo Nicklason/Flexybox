@@ -1,11 +1,32 @@
 public static class RestaurantService
 {
-  private static List<TimeIntervalModel> SevenToTwentTwo = new List<TimeIntervalModel>() {
+  private static List<TimeIntervalModel> SevenToTwentyTwo = new List<TimeIntervalModel>() {
     new TimeIntervalModel
     {
       Start = new TimeSpan(7, 0, 0),
       End = new TimeSpan(22, 0, 0)
     }
+  };
+
+  private static List<TimeIntervalModel> TwelveToMidnight = new List<TimeIntervalModel>() {
+    new TimeIntervalModel
+    {
+      Start = new TimeSpan(12, 0, 0),
+      End = new TimeSpan(24, 0, 0)
+    }
+  };
+
+  private static List<TimeIntervalModel> MultipleIntervals = new List<TimeIntervalModel>() {
+    new TimeIntervalModel
+    {
+      Start = new TimeSpan(7, 0, 0),
+      End = new TimeSpan(12, 0, 0)
+    },
+    new TimeIntervalModel
+    {
+      Start = new TimeSpan(16, 0, 0),
+      End = new TimeSpan(22, 0, 0)
+    },
   };
 
   private static List<RestaurantModel> Restaurants = new()
@@ -42,37 +63,37 @@ public static class RestaurantService
           Monday = new OpeningHoursDayModel
           {
             DayName = "Monday",
-            Intervals = SevenToTwentTwo
+            Intervals = SevenToTwentyTwo
           },
           Tuesday = new OpeningHoursDayModel
           {
             DayName = "Tuesday",
-            Intervals = SevenToTwentTwo
+            Intervals = SevenToTwentyTwo
           },
           Wednesday = new OpeningHoursDayModel
           {
             DayName = "Wednesday",
-            Intervals = SevenToTwentTwo
+            Intervals = SevenToTwentyTwo
           },
           Thursday = new OpeningHoursDayModel
           {
             DayName = "Thursday",
-            Intervals = SevenToTwentTwo
+            Intervals = SevenToTwentyTwo
           },
           Friday = new OpeningHoursDayModel
           {
             DayName = "Friday",
-            Intervals = SevenToTwentTwo
+            Intervals = TwelveToMidnight
           },
           Saturday = new OpeningHoursDayModel
           {
             DayName = "Saturday",
-            Intervals = SevenToTwentTwo
+            Intervals = TwelveToMidnight
           },
           Sunday = new OpeningHoursDayModel
           {
             DayName = "Sunday",
-            Intervals = SevenToTwentTwo
+            Intervals = MultipleIntervals
           },
           Holiday = new OpeningHoursDayModel
           {
