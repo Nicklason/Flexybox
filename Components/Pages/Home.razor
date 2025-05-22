@@ -3,8 +3,8 @@
 @inject FavoriteDepartmentsService FavoriteDepartmentsService
 
 @code {
-  private List<DepartmentModel> departments = DepartmentsService.GetAll();
-  private List<DepartmentModel> favoriteDepartments = new List<DepartmentModel>();
+  private List<Data.Department> departments = DepartmentsService.GetAll();
+  private List<Data.Department> favoriteDepartments = new List<Data.Department>();
 
   private bool IsLoaded = false;
 

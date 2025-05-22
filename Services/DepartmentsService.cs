@@ -1,115 +1,144 @@
+using Flexybox.Data;
+
 public static class DepartmentsService
 {
-  private static List<TimeIntervalModel> SevenToTwentyTwo = new List<TimeIntervalModel>() {
-    new TimeIntervalModel
+  private static List<TimeInterval> SevenToTwentyTwo = new List<TimeInterval>() {
+    new TimeInterval
     {
       Start = new TimeSpan(7, 0, 0),
       End = new TimeSpan(22, 0, 0)
     }
   };
 
-  private static List<TimeIntervalModel> TwelveToMidnight = new List<TimeIntervalModel>() {
-    new TimeIntervalModel
+  private static List<TimeInterval> TwelveToMidnight = new List<TimeInterval>() {
+    new TimeInterval
     {
       Start = new TimeSpan(12, 0, 0),
       End = new TimeSpan(24, 0, 0)
     }
   };
 
-  private static List<TimeIntervalModel> MultipleIntervals = new List<TimeIntervalModel>() {
-    new TimeIntervalModel
+  private static List<TimeInterval> MultipleIntervals = new List<TimeInterval>() {
+    new TimeInterval
     {
       Start = new TimeSpan(7, 0, 0),
       End = new TimeSpan(12, 0, 0)
     },
-    new TimeIntervalModel
+    new TimeInterval
     {
       Start = new TimeSpan(16, 0, 0),
       End = new TimeSpan(22, 0, 0)
     },
   };
 
-  private static List<DepartmentModel> Departments = new()
+  private static List<Department> Departments = new()
   {
-    new DepartmentModel
+    new Department
     {
       Name = "Aalborg",
-      Images = new List<string> {
-        "/red.png",
-        "/green.png",
-        "/blue.png",
-        "/red.png",
-        "/green.png",
-        "/blue.png",
-        "/red.png",
-        "/green.png",
-        "/blue.png"
+      Images = new List<Image> {
+        new Image
+        {
+          Url = "/red.png"
+        },
+        new Image
+        {
+          Url = "/green.png"
+        },
+        new Image
+        {
+          Url = "/blue.png"
+        },
+        new Image
+        {
+          Url = "/red.png"
+        },
+        new Image
+        {
+          Url = "/green.png"
+        },
+        new Image
+        {
+          Url = "/blue.png"
+        },
+        new Image
+        {
+          Url = "/red.png"
+        },
+        new Image
+        {
+          Url = "/green.png"
+        },
+        new Image
+        {
+          Url = "/blue.png"
+        },
       },
-      Address = new AddressModel {
+      Address = new Address {
         Street = "Østerågade 27",
         City = "Aalborg",
         ZipCode = 9000
       },
-      Contact = new ContactModel {
+      Contact = new Contact {
         PhoneCountryCode = "45",
         PhoneNumber = "11 22 33 44",
         Email = "aalborg@flexybox.com",
         HasSupportChat = true
       },
       OpenHours = new [] { "Restaurant", "Takeaway", "Buffet", "Special Events" }.Select((name) =>
-        new OpeningHoursModel
+        new OpeningHours
         {
           Name = name,
-          Monday = new OpeningHoursDayModel
+          Days = new List<OpeningHoursDay> {new OpeningHoursDay
           {
             DayName = "Monday",
             Intervals = SevenToTwentyTwo
           },
-          Tuesday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Tuesday",
             Intervals = SevenToTwentyTwo
           },
-          Wednesday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Wednesday",
             Intervals = SevenToTwentyTwo
           },
-          Thursday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Thursday",
             Intervals = SevenToTwentyTwo
           },
-          Friday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Friday",
             Intervals = name == "Restaurant" ? SevenToTwentyTwo : TwelveToMidnight
           },
-          Saturday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Saturday",
             Intervals = name == "Restaurant" ? SevenToTwentyTwo : TwelveToMidnight
           },
-          Sunday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Sunday",
             Intervals = name == "Restaurant" ? SevenToTwentyTwo : MultipleIntervals
           },
-          Holiday = new OpeningHoursDayModel
+          new OpeningHoursDay
           {
             DayName = "Holiday",
-            Intervals = new () {}
+            Intervals = new List<TimeInterval>() {}
           }
-        }).ToList()
+        } }).ToList()
     },
   };
 
-  public static DepartmentModel? GetByName(string name)
+  public static Department? GetByName(string name)
   {
     return Departments.FirstOrDefault(r => r.Name == name);
   }
 
-  public static List<DepartmentModel> GetAll()
+  public static List<Department> GetAll()
   {
     return Departments;
   }

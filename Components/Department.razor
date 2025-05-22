@@ -5,13 +5,13 @@
   [Parameter]
   public required string Name { get; set; }
   [Parameter]
-  public required List<string> Images { get; set; }
+  public required List<Data.Image> Images { get; set; }
   [Parameter]
-  public required AddressModel Address { get; set; }
+  public required Address Address { get; set; }
   [Parameter]
-  public required ContactModel Contact { get; set; }
+  public required Contact Contact { get; set; }
   [Parameter]
-  public required List<OpeningHoursModel> OpenHours { get; set; }
+  public required List<Data.OpeningHours> OpenHours { get; set; }
 
   private const string LIKED_STORE_KEY = "liked";
 
@@ -65,11 +65,11 @@
     <div class="subsection scroll-container">
       @foreach (var image in Images)
       {
-        <img src="@image" />
+        <img src="@image.Url" />
       }
     </div>
   </div>
 
-  <OpeningHours OpenHours="@OpenHours" />
+  <OpeningHours OpenHours="@OpenHours.ToList()" />
   
 </div>

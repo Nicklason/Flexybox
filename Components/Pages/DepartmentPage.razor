@@ -3,7 +3,7 @@
 @code {
   [Parameter] public required string Name { get; set; }
 
-  private DepartmentModel? model;
+  private Data.Department? model;
 
   protected override void OnInitialized()
   {
@@ -17,5 +17,5 @@
 }
 else
 {
-  <Department Name="@model.Name" Images="@model.Images" Address="@model.Address" Contact="@model.Contact" OpenHours="@model.OpenHours" />
+  <Department Name="@model.Name" Images="@model.Images.ToList()" Address="@model.Address" Contact="@model.Contact" OpenHours="@model.OpenHours.ToList()" />
 }
