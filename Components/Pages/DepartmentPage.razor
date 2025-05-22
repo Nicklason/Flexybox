@@ -1,0 +1,21 @@
+@page "/department/{Name}"
+
+@code {
+  [Parameter] public required string Name { get; set; }
+
+  private DepartmentModel? model;
+
+  protected override void OnInitialized()
+  {
+    model = DepartmentsService.GetByName(Name);
+  }
+}
+
+@if (model == null)
+{
+  <p>Department not found.</p>
+}
+else
+{
+  <Department Name="@model.Name" Images="@model.Images" Address="@model.Address" Contact="@model.Contact" OpenHours="@model.OpenHours" />
+}

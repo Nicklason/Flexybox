@@ -1,4 +1,4 @@
-public class RestaurantModel
+public class DepartmentModel
 {
   public required string Name { get; set; }
   public required List<string> Images { get; set; }

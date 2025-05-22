@@ -1,4 +1,4 @@
-public static class RestaurantService
+public static class DepartmentsService
 {
   private static List<TimeIntervalModel> SevenToTwentyTwo = new List<TimeIntervalModel>() {
     new TimeIntervalModel
@@ -29,9 +29,9 @@ public static class RestaurantService
     },
   };
 
-  private static List<RestaurantModel> Restaurants = new()
+  private static List<DepartmentModel> Departments = new()
   {
-    new RestaurantModel
+    new DepartmentModel
     {
       Name = "Aalborg",
       Images = new List<string> {
@@ -104,13 +104,13 @@ public static class RestaurantService
     },
   };
 
-  public static RestaurantModel? GetByName(string name)
+  public static DepartmentModel? GetByName(string name)
   {
-    return Restaurants.FirstOrDefault(r => r.Name == name);
+    return Departments.FirstOrDefault(r => r.Name == name);
   }
 
-  public static List<RestaurantModel> GetAll()
+  public static List<DepartmentModel> GetAll()
   {
-    return Restaurants;
+    return Departments;
   }
 }

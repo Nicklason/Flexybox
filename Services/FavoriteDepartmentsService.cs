@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
-public class LikedRestaurantsService
+public class FavoriteDepartmentsService
 {
   private readonly ProtectedLocalStorage storage;
 
-  private const string LIKED_STORE_KEY = "liked";
+  private const string STORE_KEY = "favorites";
 
-  public LikedRestaurantsService(ProtectedLocalStorage storage)
+  public FavoriteDepartmentsService(ProtectedLocalStorage storage)
   {
     this.storage = storage;
   }
 
   public async Task<HashSet<string>> GetLikedAsync()
   {
-    var result = await storage.GetAsync<HashSet<string>>(LIKED_STORE_KEY);
+    var result = await storage.GetAsync<HashSet<string>>(STORE_KEY);
     if (result.Success && result.Value != null)
     {
       return result.Value;
@@ -23,6 +23,6 @@ public class LikedRestaurantsService
 
   public async Task SaveLikedAsync(HashSet<string> liked)
   {
-    await storage.SetAsync(LIKED_STORE_KEY, liked);
+    await storage.SetAsync(STORE_KEY, liked);
   }
 }

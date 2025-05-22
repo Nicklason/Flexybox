@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<LikedRestaurantsService>();
+builder.Services.AddScoped<FavoriteDepartmentsService>();
 
 var app = builder.Build();
 

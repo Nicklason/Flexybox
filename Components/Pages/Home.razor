@@ -1,10 +1,10 @@
 ﻿@page "/"
 
-@inject LikedRestaurantsService LikedRestaurantsService
+@inject FavoriteDepartmentsService FavoriteDepartmentsService
 
 @code {
-  private List<RestaurantModel> restaurants = RestaurantService.GetAll();
-  private List<RestaurantModel> likedRestaurants = new List<RestaurantModel>();
+  private List<DepartmentModel> departments = DepartmentsService.GetAll();
+  private List<DepartmentModel> favoriteDepartments = new List<DepartmentModel>();
 
   private bool IsLoaded = false;
 
@@ -19,8 +19,8 @@
   }
 
   private async Task LoadStateAsync() {
-    var liked = await LikedRestaurantsService.GetLikedAsync();
-    likedRestaurants = restaurants.Where((restaurant) => liked.Contains(restaurant.Name)).ToList();
+    var favorites = await FavoriteDepartmentsService.GetLikedAsync();
+    favoriteDepartments = departments.Where((department) => favorites.Contains(department.Name)).ToList();
   }
 }
 
@@ -32,33 +32,33 @@
       </div>
     </div>
     <div class="subsection">
-      <p>Explore our collection of restaurants.</p>
+      <p>Explore departments.</p>
     </div>
-    @if (likedRestaurants.Count != 0) {
+    @if (favoriteDepartments.Count != 0) {
     <div class="subsection">
-      <h2>Liked Restaurants</h2>
+      <h2>Your favorite departments</h2>
 
-      @foreach (var restaurant in likedRestaurants)
+      @foreach (var department in favoriteDepartments)
       {
-        <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
-          @restaurant.Name
+        <NavLink href="@("/department/" + department.Name)" Match="NavLinkMatch.All">
+          @department.Name
         </NavLink>
       }
     </div>
     }
     <div class="subsection">
-      <h2>Featured Restaurants</h2>
+      <h2>Featured departments</h2>
 
-      @if (restaurants.Count == 0)
+      @if (departments.Count == 0)
       {
-        <p>No restaurants available.</p>
+        <p>No departments available.</p>
         return;
       }
 
-      @foreach (var restaurant in restaurants)
+      @foreach (var department in departments)
       {
-        <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
-          @restaurant.Name
+        <NavLink href="@("/department/" + department.Name)" Match="NavLinkMatch.All">
+          @department.Name
         </NavLink>
       }
     </div>

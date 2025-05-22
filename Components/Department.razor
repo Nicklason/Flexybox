@@ -1,4 +1,4 @@
-@inject LikedRestaurantsService LikedRestaurantsService
+@inject FavoriteDepartmentsService FavoriteDepartmentsService
 
 @code {
   [Parameter]
@@ -28,21 +28,21 @@
   }
 
   private async Task LoadStateAsync() {
-    var liked = await LikedRestaurantsService.GetLikedAsync();
+    var liked = await FavoriteDepartmentsService.GetLikedAsync();
     IsLiked = liked.Contains(Name);
   }
 
   private async Task ToggleLikedAsync() {
     IsLiked = !IsLiked;
 
-    var liked = await LikedRestaurantsService.GetLikedAsync();
+    var liked = await FavoriteDepartmentsService.GetLikedAsync();
     if (IsLiked) {
       liked.Add(Name);
     } else {
       liked.Remove(Name);
     }
 
-    await LikedRestaurantsService.SaveLikedAsync(liked);
+    await FavoriteDepartmentsService.SaveLikedAsync(liked);
   }
 }
 
