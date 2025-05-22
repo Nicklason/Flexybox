@@ -3,20 +3,20 @@ namespace Flexybox.Data;
 public class TimeInterval
 {
     public int Id { get; set; }
-    public TimeSpan Start { get; set; }
-    public TimeSpan End { get; set; }
+    public required TimeSpan Start { get; set; }
+    public required TimeSpan End { get; set; }
 
     public int OpeningHoursDayId { get; set; }
-    public OpeningHoursDay OpeningHoursDay { get; set; }
+    public OpeningHoursDay OpeningHoursDay { get; set; } = null!;
 }
 
 public class OpeningHoursDay
 {
     public int Id { get; set; }
-    public string DayName { get; set; }
-    public ICollection<TimeInterval> Intervals { get; set; }
+    public required string DayName { get; set; }
+    public required ICollection<TimeInterval> Intervals { get; set; }
     public int OpeningHoursId { get; set; }
-    public OpeningHours OpeningHours { get; set; }
+    public OpeningHours OpeningHours { get; set; } = null!;
 
     public bool IsClosed => Intervals.Count == 0;
 }
@@ -24,10 +24,10 @@ public class OpeningHoursDay
 public class OpeningHours
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public ICollection<OpeningHoursDay> Days { get; set; }
+    public required string Name { get; set; }
+    public required ICollection<OpeningHoursDay> Days { get; set; }
     public int DepartmentId { get; set; }
-    public Department Department { get; set; }
+    public Department Department { get; set; } = null!;
 
     public bool IsOpen(DateTime dateTime)
     {
