@@ -69,7 +69,6 @@ public class OpeningHoursModel
 
     public bool IsOpenNow() => IsOpen(DateTime.Now);
 
-    // TODO: Collapse days in a row with same opening hours into a single entry
     public List<(string, string)> GetOpeningHoursSummary(int maxCollapse = int.MaxValue)
     {
         var summary = new List<(string, string)>();
