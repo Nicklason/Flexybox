@@ -14,10 +14,10 @@
     <span>@Address.City</span>
   </div>
   <div class="row">
-    <span>@Contact.GetPhoneNumber()</span>
-    <span>@Contact.Email</span>
+    <span><i class="fa-solid fa-mobile-screen"></i>@Contact.GetPhoneNumber()</span>
+    <span><i class="fa-solid fa-at"></i>@Contact.Email</span>
     @if (@Contact.HasSupportChat) {
-      <span>Support Chat</span>
+      <span><i class="fa-solid fa-headset"></i></span>
     }
   </div>
 </div>
