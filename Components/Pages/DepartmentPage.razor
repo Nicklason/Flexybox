@@ -1,13 +1,15 @@
-@page "/department/{Name}"
+@page "/department/{Id:int}"
+
+@inject DepartmentsService DepartmentsService
 
 @code {
-  [Parameter] public required string Name { get; set; }
+  [Parameter] public required int Id { get; set; }
 
   private Data.Department? model;
 
-  protected override void OnInitialized()
+  protected override async Task OnInitializedAsync()
   {
-    model = DepartmentsService.GetByName(Name);
+    model = await DepartmentsService.GetByIdAsync(Id);
   }
 }
 

@@ -10,7 +10,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddScoped<FavoriteDepartmentsService>()
-    .AddBlazoredToast();
+    .AddBlazoredToast()
+    .AddScoped<DepartmentsService>();
 
 builder.Services.AddDbContext<AppDbContext>((options) => {
     options.UseMySql(DbConfig.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 34)));

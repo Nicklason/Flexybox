@@ -1,12 +1,17 @@
 ﻿@page "/"
 
+@inject DepartmentsService DepartmentsService
 @inject FavoriteDepartmentsService FavoriteDepartmentsService
 
 @code {
-  private List<Data.Department> departments = DepartmentsService.GetAll();
-  private List<Data.Department> favoriteDepartments = new List<Data.Department>();
+  private List<(int, string)> departments = new ();
+  private List<(int, string)> favoriteDepartments = new ();
 
   private bool IsLoaded = false;
+
+  protected override async Task OnInitializedAsync() {
+    departments = await DepartmentsService.GetAllIdsAndNamesAsync();
+  }
 
   protected override async Task OnAfterRenderAsync(bool firstRender) {
     if (!firstRender) {
@@ -20,7 +25,7 @@
 
   private async Task LoadStateAsync() {
     var favorites = await FavoriteDepartmentsService.GetLikedAsync();
-    favoriteDepartments = departments.Where((department) => favorites.Contains(department.Name)).ToList();
+    favoriteDepartments = departments.Where((department) => favorites.Contains(department.Item2)).ToList();
   }
 }
 
@@ -40,8 +45,8 @@
 
       @foreach (var department in favoriteDepartments)
       {
-        <NavLink href="@("/department/" + department.Name)" Match="NavLinkMatch.All">
-          @department.Name
+        <NavLink href="@("/department/" + department.Item1)" Match="NavLinkMatch.All">
+          @department.Item2
         </NavLink>
       }
     </div>
@@ -53,11 +58,11 @@
       {
         <p>No departments available.</p>
       } else {
-      @foreach (var department in departments)
-      {
-        <NavLink href="@("/department/" + department.Name)" Match="NavLinkMatch.All">
-          @department.Name
-        </NavLink>
+        @foreach (var department in departments)
+        {
+          <NavLink href="@("/department/" + department.Item1)" Match="NavLinkMatch.All">
+            @department.Item2
+          </NavLink>
         }
       }
     </div>
