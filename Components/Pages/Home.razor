@@ -52,14 +52,13 @@
       @if (departments.Count == 0)
       {
         <p>No departments available.</p>
-        return;
-      }
-
+      } else {
       @foreach (var department in departments)
       {
         <NavLink href="@("/department/" + department.Name)" Match="NavLinkMatch.All">
           @department.Name
         </NavLink>
+        }
       }
     </div>
   </div>
