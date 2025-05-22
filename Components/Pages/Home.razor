@@ -1,7 +1,27 @@
 ﻿@page "/"
 
+@inject LikedRestaurantsService LikedRestaurantsService
+
 @code {
   private List<RestaurantModel> restaurants = RestaurantService.GetAll();
+  private List<RestaurantModel> likedRestaurants = new List<RestaurantModel>();
+
+  private bool IsLoaded = false;
+
+  protected override async Task OnAfterRenderAsync(bool firstRender) {
+    if (!firstRender) {
+      return;
+    }
+
+    await LoadStateAsync();
+    IsLoaded = true;
+    StateHasChanged();
+  }
+
+  private async Task LoadStateAsync() {
+    var liked = await LikedRestaurantsService.GetLikedAsync();
+    likedRestaurants = restaurants.Where((restaurant) => liked.Contains(restaurant.Name)).ToList();
+  }
 }
 
 <div class="page">
@@ -15,6 +35,18 @@
       <p>Explore our collection of restaurants.</p>
     </div>
   </div>
+  @if (likedRestaurants.Count != 0) {
+  <div class="subsection">
+    <h2>Liked Restaurants</h2>
+
+    @foreach (var restaurant in likedRestaurants)
+    {
+      <NavLink href="@("/restaurant/" + restaurant.Name)" Match="NavLinkMatch.All">
+        @restaurant.Name
+      </NavLink>
+    }
+  </div>
+  }
   <div class="subsection">
     <h2>Featured Restaurants</h2>
 
