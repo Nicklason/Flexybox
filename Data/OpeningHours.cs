@@ -1,5 +1,7 @@
 namespace Flexybox.Data;
 
+using PublicHoliday;
+
 public class TimeInterval
 {
     public int Id { get; set; }
@@ -31,8 +33,7 @@ public class OpeningHours
 
     public bool IsOpen(DateTime dateTime)
     {
-        // TODO: Check if the date is a holiday
-        var isHoliday = false;
+        var isHoliday = new DenmarkPublicHoliday().IsPublicHoliday(dateTime);
 
         OpeningHoursDay? openingHoursDay;
 
